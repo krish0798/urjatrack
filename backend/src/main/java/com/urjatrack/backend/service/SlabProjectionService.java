@@ -119,7 +119,7 @@ public class SlabProjectionService {
             double unitsAllowedToStayInCurrent = currentSlab.getToUnit() - unitsSoFar;
             
             if (unitsAllowedToStayInCurrent <= 0) {
-                 return "You have already crossed into a higher slab for this cycle.";
+                 return "You're right at the edge of your current slab — any more usage today will push you into a higher slab.";
             }
             
             double targetDailyPace = unitsAllowedToStayInCurrent / daysRemaining;
