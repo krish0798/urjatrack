@@ -83,7 +83,7 @@ public class SlabProjectionService {
             
             double slabSize = (slab.getToUnit() != null) 
                 ? (slab.getToUnit() - slab.getFromUnit()) 
-                : Double.MAX_VALUE;
+                : remainingUnits;
                 
             double unitsInThisSlab = Math.min(remainingUnits, slabSize);
             energyCharge += (unitsInThisSlab * slab.getRatePerUnit());
@@ -134,9 +134,10 @@ public class SlabProjectionService {
                 targetDailyPace, daysRemaining, savings
             );
         } else {
-            double margin = (currentSlab.getToUnit() != null) 
-                ? (currentSlab.getToUnit() - projectedUnits) 
-                : Double.MAX_VALUE;
+            if (currentSlab.getToUnit() == null) {
+                return "On track! You're in the highest slab — no further slab increases possible.";
+            }
+            double margin = currentSlab.getToUnit() - projectedUnits;
             return String.format("On track! You have a safe margin of %.1f units before the next slab.", margin);
         }
     }
