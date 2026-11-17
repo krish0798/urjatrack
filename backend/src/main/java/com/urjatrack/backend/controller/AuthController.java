@@ -36,6 +36,11 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("OK");
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
